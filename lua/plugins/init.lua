@@ -76,9 +76,26 @@ return {
     { import = "nvcommunity.completion.copilot" },
     {
       "copilot.lua",
-      -- opts = {
-      -- ...
-      -- },
+      cmd = "Copilot",
+      event = "InsertEnter",
+      config = function()
+        require("copilot").setup({
+          suggestion = {
+            enabled = true,
+            auto_trigger = false,
+            hide_during_completion = true,
+            debounce = 75,
+            keymap = {
+              accept = "<M-a>",
+              accept_word = false,
+              accept_line = false,
+              next = "<M-n>",
+              prev = "<M-p>",
+              dismiss = "<M-d>",
+            },
+          },
+        })
+      end,
     },
   },
 

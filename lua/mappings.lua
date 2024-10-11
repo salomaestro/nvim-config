@@ -2,6 +2,7 @@ require "nvchad.mappings"
 
 -- add yours here
 
+local vim = vim
 local map = vim.keymap.set
 local g = vim.g
 local diag = vim.diagnostic
@@ -10,6 +11,8 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
+map("n", "<leader>cp", "<cmd> Copilot panel<cr>", { desc = "Copilot panel" })
 
 map("n", "<leader>ca", function()
   vim.lsp.buf.code_action()
