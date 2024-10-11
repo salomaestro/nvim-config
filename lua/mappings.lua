@@ -47,3 +47,20 @@ function Toggle_diagnostics()
   end
 end
 map("n", "<leader>lt", Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
+
+-- select a session to load
+map("n", "<leader>qs", function()
+  require("persistence").select()
+end, { desc = "Select session to load" })
+
+-- load the last session
+map("n", "<leader>ql", function()
+  require("persistence").load { last = true }
+end, { desc = "Load last session" })
+
+-- stop Persistence => session won't be saved on exit
+map("n", "<leader>qd", function()
+  require("persistence").stop()
+end, { desc = "Stop persistence" })
+
+-- tab related stuff
