@@ -56,6 +56,16 @@ return {
   -- 	},
   -- },
   {
+    "nvim-treesitter/nvim-treesitter-context",
+    lazy = false,
+    config = function()
+      require"treesitter-context".setup{
+        enable = true,
+        max_lines = 0, -- No limit
+      }
+    end, 
+  },
+  {
     "rktjmp/paperplanes.nvim",
     opts = {
       provider = "dpaste.org",
