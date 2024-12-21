@@ -66,4 +66,66 @@ map("n", "<leader>qd", function()
   require("persistence").stop()
 end, { desc = "Stop persistence" })
 
--- tab related stuff
+-- debug related stuff
+local dap = require "dap"
+
+map("n", "<leader>db", function()
+  dap.toggle_breakpoint()
+end, { desc = "Toggle breakpoint" })
+
+map("n", "<leader>dc", function()
+  dap.continue()
+end, { desc = "Continue" })
+
+map("n", "<leader>dr", function()
+  dap.repl.open()
+end, { desc = "Open REPL" })
+
+map("n", "<leader>ds", function()
+  dap.step_over()
+end, { desc = "Step over" })
+
+map("n", "<leader>di", function()
+  dap.step_into()
+end, { desc = "Step into" })
+
+map("n", "<leader>do", function()
+  dap.step_out()
+end, { desc = "Step out" })
+
+map("n", "<leader>dT", function()
+  dap.terminate()
+end, { desc = "Terminate" })
+
+map("n", "<leader>dl", function()
+  dap.run_last()
+end, { desc = "Run Last" })
+
+map("n", "<leader>dC", function()
+  dap.run_to_cursor()
+end, { desc = "Run to Cursor" })
+
+-- dapui
+
+local dapui = require "dapui"
+local widgets = require "dap.ui.widgets"
+
+map("n", "<leader>du", function()
+  dapui.toggle()
+end, { desc = "Toggle UI" })
+
+map({ "n", "v" }, "<Leader>dh", function()
+  widgets.hover()
+end, { desc = "Hover" })
+
+map({ "n", "v" }, "<Leader>dp", function()
+  widgets.preview()
+end, { desc = "Preview" })
+
+map("n", "<Leader>df", function()
+  widgets.centered_float(widgets.frames)
+end, { desc = "Frames" })
+
+map("n", "<Leader>ds", function()
+  widgets.centered_float(widgets.scopes)
+end, { desc = "Scopes" })

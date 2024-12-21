@@ -16,68 +16,111 @@ return {
   },
 
   {
+    "mfussenegger/nvim-dap",
+    lazy = true,
+  },
+
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    opts = {
+      handlers = {},
+      automatic_installations = {
+        exclude = {
+          "python",
+        },
+      },
+      ensure_installed = {
+        "python",
+      },
+    },
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "williamboman/mason.nvim",
+    },
+  },
+
+  {
+    "mfussenegger/nvim-dap-python",
+    lazy = true,
+    config = function()
+      local python = vim.fn.expand "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+      require("dap-python").setup(python)
+    end,
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+  },
+
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    config = true,
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+  },
+
+  {
+    "rcarriga/nvim-dap-ui",
+    config = true,
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "mfussenegger/nvim-dap-python",
+      "nvim-neotest/nvim-nio",
+      "theHamsta/nvim-dap-virtual-text",
+    },
+  },
+
+  {
     "mfussenegger/nvim-lint",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      local lint = require "lint"
-
-      lint.linters_by_ft = {
-        python = { "ruff" },
-        yaml = { "yamllint" },
-        lua = { "selene" },
-      }
-
-      local ns = lint.get_namespace "ruff"
-      vim.diagnostic.config({ virtual_text = false, underline = false }, ns)
-
-      local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-
-      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-        group = lint_augroup,
-        callback = function()
-          lint.try_lint()
-        end,
-      })
-
-      vim.keymap.set("n", "<leader>ld", function()
-        lint.try_lint()
-      end, { desc = "Trigger linting for current file" })
+      require "configs.lint"
     end,
   },
 
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim",
+        "lua",
+        "python",
+        "markdown",
+      },
+    },
+  },
+
   {
     "nvim-treesitter/nvim-treesitter-context",
     lazy = false,
     config = function()
-      require"treesitter-context".setup{
+      require("treesitter-context").setup {
         enable = true,
         max_lines = 0, -- No limit
       }
-    end, 
+    end,
   },
-  {
-    "rktjmp/paperplanes.nvim",
-    opts = {
-      provider = "dpaste.org",
-    },
 
   {
-    "folke/persistence.nvim",
-    event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    opts = {
-      -- add any custom options here
-    }
-  } },
+    "rktjmp/paperplanes.nvim",
+    lazy = false,
+    config = function()
+      require("paperplanes").setup {
+        provider = "dpaste.org",
+      }
+    end,
+  },
+
+  {
+    {
+      "folke/persistence.nvim",
+      event = "BufReadPre", -- this will only start session saving when an actual file was opened
+      opts = {
+        -- add any custom options here
+      },
+    },
+  },
 
   {
     "NvChad/nvcommunity",
@@ -89,7 +132,7 @@ return {
       cmd = "Copilot",
       event = "InsertEnter",
       config = function()
-        require("copilot").setup({
+        require("copilot").setup {
           suggestion = {
             enabled = true,
             auto_trigger = true,
@@ -104,7 +147,7 @@ return {
               dismiss = "<M-d>",
             },
           },
-        })
+        }
       end,
     },
   },
