@@ -113,19 +113,14 @@ return {
   },
 
   {
-    {
-      "folke/persistence.nvim",
-      event = "BufReadPre", -- this will only start session saving when an actual file was opened
-      opts = {
-        -- add any custom options here
-      },
-    },
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
   },
 
   {
     "NvChad/nvcommunity",
     { import = "nvcommunity.git.diffview" },
-    { import = "nvcommunity.git.lazygit" },
+    -- { import = "nvcommunity.git.lazygit" },
     { import = "nvcommunity.completion.copilot" },
     {
       "copilot.lua",
@@ -192,6 +187,27 @@ return {
 
   {
     "tpope/vim-surround",
+    lazy = false,
+  },
+
+  {
+    "echasnovski/mini.nvim",
+    version = "*",
+    config = function()
+      require("mini.diff").setup()
+      require("mini.pick").setup()
+    end,
+  },
+
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require "configs.codecompanion"
+    end,
     lazy = false,
   },
 
