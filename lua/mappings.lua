@@ -10,10 +10,6 @@ local diag = vim.diagnostic
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
-
-map("n", "<leader>cp", "<cmd> Copilot panel<cr>", { desc = "Copilot panel" })
-
 map("n", "<leader>ca", function()
   vim.lsp.buf.code_action()
 end, { desc = "LSP code action" })
@@ -129,3 +125,17 @@ end, { desc = "Frames" })
 map("n", "<Leader>ds", function()
   widgets.centered_float(widgets.scopes)
 end, { desc = "Scopes" })
+
+-- CodeCompletion mappings
+
+map({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true, desc = "Code Actions" })
+map({ "n", "v" }, "<Leader>a", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true, desc = "Code Chat" })
+map("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true, desc = "Code Chat Add Visual" })
+map("v", "<Leader>ce", function()
+  require("codecompanion").prompt("explain")
+end, { noremap = true, silent = true, desc = "Explain Selection" }
+)
+
+-- Expand 'cc' into 'CodeCompanion' in the command line
+vim.cmd([[cab cc CodeCompanion]])
+
