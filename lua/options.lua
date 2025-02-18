@@ -1,13 +1,9 @@
 require "nvchad.options"
 
--- add yours here!
-
-local o = vim.o
-local opt = vim.opt
--- o.cursorlineopt ='both' -- to enable cursorline!
-
-o.scrolloff = 10
-opt.relativenumber = true
+vim.o.cursorlineopt ='both' -- to enable cursorline!
+vim.o.scrolloff = 10
+vim.opt.relativenumber = true
+vim.g.wiki_root = "~/wiki"
 
 local highlight_group = vim.api.nvim_create_augroup("yankhighlight", { clear = true })
 vim.api.nvim_create_autocmd("textyankpost", {
