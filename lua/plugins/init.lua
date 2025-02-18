@@ -21,6 +21,11 @@ return {
   },
 
   {
+    "lervag/wiki.vim",
+    lazy = false,
+  },
+
+  {
     "jay-babu/mason-nvim-dap.nvim",
     opts = {
       handlers = {},

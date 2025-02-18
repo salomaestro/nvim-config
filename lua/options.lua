@@ -8,6 +8,7 @@ local opt = vim.opt
 
 o.scrolloff = 10
 opt.relativenumber = true
+vim.g.wiki_root = "~/wiki"
 
 local highlight_group = vim.api.nvim_create_augroup("yankhighlight", { clear = true })
 vim.api.nvim_create_autocmd("textyankpost", {
