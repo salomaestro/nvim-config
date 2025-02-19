@@ -139,3 +139,13 @@ end, { noremap = true, silent = true, desc = "Explain Selection" }
 -- Expand 'cc' into 'CodeCompanion' in the command line
 vim.cmd([[cab cc CodeCompanion]])
 
+-- mappings for wiki.vim
+map("n", "<leader>iw", function ()
+  require("telescope.builtin").live_grep({
+    prompt_title = "Search Wiki",
+    cwd = vim.fn.expand("~/wiki"),
+  })
+end, { desc = "Search Wiki" })
+
+map("n", "<leader>jn", "<cmd>WikiJournalNext<cr>", { desc = "Next Journal" })
+map("n", "<leader>jp", "<cmd>WikiJournalPrev<cr>", { desc = "Previous Journal" })
