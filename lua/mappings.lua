@@ -149,3 +149,65 @@ end, { desc = "Search Wiki" })
 
 map("n", "<leader>jn", "<cmd>WikiJournalNext<cr>", { desc = "Next Journal" })
 map("n", "<leader>jp", "<cmd>WikiJournalPrev<cr>", { desc = "Previous Journal" })
+
+
+-- Mappings for Man using ripgrep
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+local previewers = require("telescope.previewers")
+
+-- Define a custom previewer that runs 'man' in a terminal job:
+local man_previewer = previewers.new_termopen_previewer({
+  get_command = function(entry)
+    -- 'entry.value' will be the man-topic, e.g. "ls"
+    if not entry or not entry.value then
+      return { "echo", "" }
+    end
+    -- The pager string (col -bx | bat -l man -p) must be passed as one argument
+    -- so that 'man' interprets it as a shell command for the pager:
+    return {
+      "man",
+      "-P", "col -bx | bat -l man -p",  -- all as a single argument to -P
+      entry.value
+    }
+  end,
+})
+
+-- Create a mapping that invokes Telescope with our custom previewer
+map("n", "<leader>mp", function()
+  require("telescope.builtin").find_files({
+    prompt_title = "Man Pages",
+    find_command = {
+      "bash", "-c",
+      table.concat({
+        -- Pipeline:
+        --   1) 'rg --files /usr/share/man'
+        --   2) strip directory paths (xargs basename)
+        --   3) remove trailing .x or .x.gz (sed)
+        --   4) sort + unique
+        "rg --files /usr/share/man",
+        "| xargs basename",
+        "| sed 's/\\.[^.]*$//'",
+        "| sort -u",
+      }, " ")
+    },
+    -- Provide our custom previewer
+    previewer = man_previewer,
+
+    -- 3) attach_mappings() lets us override what happens when we press <CR>
+    attach_mappings = function(prompt_bufnr, map_telescope)
+      local function open_man_page()
+        local selection = action_state.get_selected_entry()
+        actions.close(prompt_bufnr)
+        -- Actually open the man page inside Neovim:
+        vim.cmd("Man " .. selection.value)
+      end
+
+      -- Bind <CR> in insert + normal mode to open the man page
+      map_telescope("i", "<CR>", open_man_page)
+      map_telescope("n", "<CR>", open_man_page)
+
+      return true
+    end,
+  })
+end, { desc = "Search manpages" })
