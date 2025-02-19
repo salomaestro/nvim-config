@@ -22,3 +22,13 @@ sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", num
 sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = ""})
 sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = ""})
 sign('DapStopped', { text='', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
+
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+  callback = function()
+    local qf = vim.fn.getqflist({ size = 0 })
+    if qf.size > 0 then
+      vim.cmd("copen")
+    end
+  end,
+  pattern = "*",
+})

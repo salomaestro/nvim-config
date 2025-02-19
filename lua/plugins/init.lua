@@ -16,6 +16,17 @@ return {
   },
 
   {
+    "vim-test/vim-test",
+    lazy = false,
+    config = function()
+      vim.g["test#use_quickfix"] = 1
+      vim.g["test#strategy"] = "neovim_sticky"
+      vim.g["test#python#runner"] = "pytest"
+      vim.g["test#python#pytest#executable"] = "uv run pytest"
+    end,
+  },
+
+  {
     "mfussenegger/nvim-dap",
     lazy = true,
   },
