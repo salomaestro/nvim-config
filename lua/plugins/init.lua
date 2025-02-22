@@ -227,7 +227,6 @@ return {
     lazy = false,
   },
 
-  -- Install a plugin
   {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
@@ -235,4 +234,28 @@ return {
       require("better_escape").setup()
     end,
   },
+
+  {
+    "aznhe21/actions-preview.nvim",
+    keys = {
+      {
+        "<leader>gf",
+        function()
+          require("actions-preview").code_actions()
+        end,
+        mode = { "n", "v" },
+        desc = "Show code actions",
+        silent = true,
+      },
+    },
+    config = function()
+      require("actions-preview").setup {
+        highlight_command = {
+          require("actions-preview.highlight").delta(),
+        },
+      }
+    end,
+    lazy = false,
+  },
+
 }

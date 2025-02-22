@@ -10,9 +10,9 @@ local diag = vim.diagnostic
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
-map("n", "<leader>ca", function()
-  vim.lsp.buf.code_action()
-end, { desc = "LSP code action" })
+map("n", "j", "gj", { desc = "Move down" })
+map("n", "k", "gk", { desc = "Move up" })
+
 map("n", "<leader>tt", function()
   require("base46").toggle_transparency()
 end, { desc = "Toggle transparency" })
