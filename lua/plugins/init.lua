@@ -103,6 +103,10 @@ return {
         "lua",
         "python",
         "markdown",
+        "latex",
+      },
+      highlight = {
+        enable = true,
       },
     },
   },
@@ -258,4 +262,9 @@ return {
     lazy = false,
   },
 
+  {
+    "barreiroleo/ltex-extra.nvim",
+    ft = { "markdown", "tex" },
+    dependencies = { "neovim/nvim-lspconfig" },
+  },
 }

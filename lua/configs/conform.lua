@@ -6,6 +6,7 @@ local options = {
     -- python = { "isort", "black" },
     python = { "isort", "ruff_fix", "ruff_format" },
     yaml = { "prettier" },
+    latex = { "bibtex-tidy", "tex-fmt", lsp_format = "fallback" }
   },
 
   -- format_on_save = {
