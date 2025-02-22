@@ -33,7 +33,6 @@ lspconfig.ruff.setup({
         ignore = {"F401", "W191"},
         preview = true,
       }
-      -- Ruff language server settings go here
     }
   }
 })

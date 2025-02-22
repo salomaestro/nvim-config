@@ -4,6 +4,7 @@ vim.o.cursorlineopt ='both' -- to enable cursorline!
 vim.o.scrolloff = 10
 vim.opt.relativenumber = true
 vim.g.wiki_root = "~/wiki"
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 local highlight_group = vim.api.nvim_create_augroup("yankhighlight", { clear = true })
 vim.api.nvim_create_autocmd("textyankpost", {

@@ -4,7 +4,7 @@ local options = {
     -- css = { "prettier" },
     -- html = { "prettier" },
     -- python = { "isort", "black" },
-    python = { "ruff" },
+    python = { "isort", "ruff_fix", "ruff_format" },
     yaml = { "prettier" },
   },
 
