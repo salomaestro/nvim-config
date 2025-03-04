@@ -211,3 +211,9 @@ map("n", "<leader>mp", function()
     end,
   })
 end, { desc = "Search manpages" })
+
+-- Mappings for Gitsigns
+
+-- Git blame
+map("v", "<leader>gb", "<cmd>lua require('gitsigns').blame_line()<cr>", { desc = "Git Blame line" })
+map("n", "<leader>gb", "<cmd>lua require('gitsigns').blame()<cr>", { desc = "Git Blame" })
