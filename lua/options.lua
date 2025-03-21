@@ -7,6 +7,15 @@ vim.opt.relativenumber = true
 vim.g.wiki_root = "~/wiki"
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
+-- Set folding options
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldcolumn = "0"
+vim.opt.foldtext = "" -- "v:lua.vim.treesitter.foldtext()"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 1
+vim.opt.foldnestmax = 4
+
 -- Set vimtex options
 vim.g.tex_flavour = "latex"
 vim.g.vimtex_view_method = "skim"
