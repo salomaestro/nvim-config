@@ -37,6 +37,11 @@ return {
   },
 
   {
+    "lervag/vimtex",
+    lazy = false,
+  },
+
+  {
     "jay-babu/mason-nvim-dap.nvim",
     opts = {
       handlers = {},
