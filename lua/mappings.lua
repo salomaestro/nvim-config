@@ -7,6 +7,7 @@ local map = vim.keymap.set
 local g = vim.g
 local diag = vim.diagnostic
 
+--  General mappings
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
@@ -47,6 +48,7 @@ function Toggle_diagnostics()
 end
 map("n", "<leader>lt", Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
 
+-- Presistence mappings
 -- select a session to load
 map("n", "<leader>qs", function()
   require("persistence").select()
@@ -212,8 +214,13 @@ map("n", "<leader>mp", function()
   })
 end, { desc = "Search manpages" })
 
--- Mappings for Gitsigns
+-- Mappings for Git stuff
 
 -- Git blame
 map("v", "<leader>gb", "<cmd>lua require('gitsigns').blame_line()<cr>", { desc = "Git Blame line" })
 map("n", "<leader>gb", "<cmd>lua require('gitsigns').blame()<cr>", { desc = "Git Blame" })
+
+-- Git diffview
+map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Git Diff File" })
+map("n", "<leader>gD", "<cmd>DiffviewOpen --cached<cr>", { desc = "Git Diff Staged" })
+map("n", "<leader>gh", "<cmd>DiffviewFileHistory<cr>", { desc = "Git File History" })
